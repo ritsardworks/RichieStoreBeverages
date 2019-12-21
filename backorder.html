@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Back Orders
+        </title>
+        <script src="jquery.min.js"></script>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    </head>
+    <body id="body">
+        <div class="container">
+            <!-- Tab links -->
+            <h3>Breakage</h3>
+                <table id="tableBreak" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>QTY.</th>
+                            <th>Breakage Type</th>
+                            <th>Date</th>
+                            <th>Broken by</th>
+                            <th>Recorded by</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyBreak">
+
+                    </tbody>
+                </table>
+                <div class="text-right">
+                    <button class="btn btn-outline-primary" id="addBreakTrigger" data-toggle="modal" data-target="#addBreakModal" >New Breakage</button>
+                </div>
+		</div>
+        <!-- Breakage Modal Here -->
+        <div id="addBreakModal" class="modal fade" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">New Breakage</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Body Here -->
+                        <div>
+                            QTY: <span id="lblQty"></span>
+                            <input class="form-control" type="number" name="qty" id="qty" placeholder="Quantity" /></div>
+                        <div>
+                            Product ID: <span id="lblName"></span>
+                            <input list="products" class="form-control" type="text" name="desc" id="desc" placeholder="Product Name" />
+                            <datalist id="products"></datalist>
+                        </div>
+                        <div>Breakage Type: <span id="lblType"></span>
+                            <select class="form-control" id="type">
+                                <option>-</option>
+                                <option>Bottle</option>
+                                <option>Case</option>
+                                <option>Shell</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            Breakage by(Profile ID): <span id="lblBrB"></span>
+                            <input list="names" class="form-control" type="text" name="name" id="name" placeholder="Profile ID" autocomplete="off"/>
+                            <datalist id="names"></datalist>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" id="newBreak" name="newProd" value="0">Add/Update
+                            Breakage</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeProdModal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End of Modal -->
+        <script src="js/breakage.js"></script>
+    </body>
+</html>

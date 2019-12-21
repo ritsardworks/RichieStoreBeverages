@@ -1,0 +1,64 @@
+Table Columns
+Credentials
+    cred_id
+    usrnm
+    psswrd
+
+Profiles
+    prof_id
+    fname
+    mname
+    lname
+    cntctnmbr
+    address
+    prof_type
+        1
+        2
+
+Products
+    prod_id
+    SKU (optional)
+    dscrptn
+    rtl_prc
+    whlsl_prc (Optional)
+    BTL_empty_prc
+    CASE_empty_prc
+
+Stock_in
+    si_id
+    stck_dt
+    prof_id FK.Profiles
+
+Stock_In_line
+    sil_id
+    qntty
+    unt_prc
+    si_id FK.Stock_in
+    prod_id FK.Products
+
+Inventory
+    inv_id
+    prod_id FK.Products
+    qntty
+
+Sales_Order
+    so_id
+    date
+    ttl_amnt
+    ttl_dpst
+    prof_id FK.Products
+
+Sales_Order_Line
+    sol_id
+    qntty
+    prc
+    empts
+    empty_typ
+        1 Bottles Only
+        2 Whole Case Only
+        3 Bottles & Whole Cases (Usable Only if Empties is Greater than the bottles specified amount of a Product)
+    dpst
+    prod_id FK.Products
+    so_id FK.Sales_Order
+
+
