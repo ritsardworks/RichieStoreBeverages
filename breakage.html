@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>
-            Back Orders
+            Breakage
         </title>
         <script src="jquery.min.js"></script>
 
@@ -20,6 +20,37 @@
         integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     </head>
     <body id="body">
+      <nav class="navbar sticky-top navbar-expand-sm bg-dark navbar-dark">
+          <a class="navbar-brand" href="#">Richie Beverages</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+              aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="pointofsale.html">POS</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="Products.html">Products</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="register.html">Profiles</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link active" href="breakage.html">Breakage</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="sales.html">Sales</a>
+                  </li>
+              </ul>
+              <ul class="navbar-nav">
+                  <li class="nav-item">
+                      <button class="nav-link btn" id="logout">Log Out</button>
+                  </li>
+              </ul>
+          </div>
+      </nav>
         <div class="container">
             <!-- Tab links -->
             <h3>Breakage</h3>
@@ -27,6 +58,7 @@
                     <thead>
                         <tr>
                             <th>QTY.</th>
+                            <th>Product</th>
                             <th>Breakage Type</th>
                             <th>Date</th>
                             <th>Broken by</th>
@@ -42,49 +74,50 @@
                     <button class="btn btn-outline-primary" id="addBreakTrigger" data-toggle="modal" data-target="#addBreakModal" >New Breakage</button>
                 </div>
 		</div>
-        <!-- Breakage Modal Here -->
-        <div id="addBreakModal" class="modal fade" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">New Breakage</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+    <!-- Breakage Modal Here -->
+    <div id="addBreakModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">New Breakage</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Body Here -->
+                    <div>
+                        QTY: <span id="lblQty" class="text-danger"></span>
+                        <input class="form-control" type="number" name="qty" id="qty" placeholder="Quantity" /></div>
+                    <div>
+                        Product ID: <span id="lblName" class="text-danger"></span>
+                        <input list="products" class="form-control" type="text" name="desc" id="desc" placeholder="Product Name" />
+                        <datalist id="products"></datalist>
                     </div>
-                    <div class="modal-body">
-                        <!-- Body Here -->
-                        <div>
-                            QTY: <span id="lblQty"></span>
-                            <input class="form-control" type="number" name="qty" id="qty" placeholder="Quantity" /></div>
-                        <div>
-                            Product ID: <span id="lblName"></span>
-                            <input list="products" class="form-control" type="text" name="desc" id="desc" placeholder="Product Name" />
-                            <datalist id="products"></datalist>
-                        </div>
-                        <div>Breakage Type: <span id="lblType"></span>
-                            <select class="form-control" id="type">
-                                <option>-</option>
-                                <option>Bottle</option>
-                                <option>Case</option>
-                                <option>Shell</option>
-                            </select>
-                        </div>
+                    <div>Breakage Type: <span id="lblType" class="text-danger"></span>
+                        <select class="form-control" id="type">
+                            <option>-</option>
+                            <option>Bottle</option>
+                            <option>Case</option>
+                            <option>Shell</option>
+                        </select>
+                    </div>
 
-                        <div>
-                            Breakage by(Profile ID): <span id="lblBrB"></span>
-                            <input list="names" class="form-control" type="text" name="name" id="name" placeholder="Profile ID" autocomplete="off"/>
-                            <datalist id="names"></datalist>
-                        </div>
+                    <div>
+                        Breakage by(Profile ID): <span id="lblBrB" class="text-danger"></span>
+                        <input list="names" class="form-control" type="text" name="name" id="name" placeholder="Profile ID" autocomplete="off"/>
+                        <datalist id="names"></datalist>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" id="newBreak" name="newProd" value="0">Add/Update Breakage</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeProdModal">Close</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="newBreak" name="newProd" value="0">Add/Update
+                        Breakage</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeProdModal">Close</button>
                 </div>
             </div>
         </div>
-        <!-- End of Modal -->
+    </div>
+    <!-- End of Modal -->
         <script src="js/breakage.js"></script>
     </body>
 </html>
