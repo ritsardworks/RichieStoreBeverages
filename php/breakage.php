@@ -37,4 +37,15 @@ function getNames(){
     }
     echo $html;
 }
+
+function newBreakage($prof_id, $prod_id, $qty, $type){
+  include 'config.php';
+  $date = date("Y-m-d H:i:s");
+  $sql = "INSERT INTO breakage VALUES(null, '$qty','$prod_id', '$type','$date', '$prof_id', ".$_SESSION['u_id'].")";
+  if($conn -> query($sql)){
+    echo "New Record Added!";
+  }else{
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
+}
 ?>

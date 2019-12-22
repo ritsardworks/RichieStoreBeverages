@@ -1,7 +1,14 @@
 $("document").ready(function (){
     loadNames();
     loadProducts();
+    $('#newBreak').onclick(function(){
+      newbreakage();
+    });
 });
+
+function newbreakage(){
+  
+}
 
 function loadNames(){
     $.ajax({
