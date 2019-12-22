@@ -7,6 +7,23 @@ $("document").ready(function (){
   });
 });
 
+function deleteBreakage(data){
+  var id = data.value;
+  $.ajax({
+    url: 'php/breakage.php',
+    type: 'post',
+    data: {viewKey: 'remove', id: id},
+    success: function(response){
+      if(response == 1){
+        alert('Successfully Deleted!');
+        loadBreakage();
+      }else{
+        alert('Something Went Wrong! Try again.')
+      }
+    }
+  });
+}
+
 function newbreakage(){
   if(checkFields() == true){
     var qty = $('#qty').val();
@@ -21,8 +38,9 @@ function newbreakage(){
         if(response == 0){
           alert("Something Went Wrong! Try Again");
         }else{
-          alert(reponse);
+          alert(response);
           loadBreakage();
+          clearFields();
         }
       }
     });
@@ -40,7 +58,7 @@ function loadBreakage(){
         window.location = reponse
       }
       else{
-          $("#tbodyBreak").append(reponse);
+          $("#tbodyBreak").html(reponse);
       }
     }
   });
@@ -61,17 +79,17 @@ function loadNames(){
 }
 
 function loadProducts(){
-    $.ajax({
-        url: "php/breakage.php?q=getProducts",
-        type: "get",
-        success: function (reponse) {
-            if (reponse == 1) {
-                alert("No Products Found!");
-            } else {
-                $("#products").append(reponse);
-            }
+  $.ajax({
+    url: "php/breakage.php?q=getProducts",
+    type: "get",
+    success: function (reponse) {
+        if (reponse == 1) {
+            alert("No Products Found!");
+        } else {
+            $("#products").append(reponse);
         }
-    });
+    }
+  });
 }
 
 function checkFields(){

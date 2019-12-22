@@ -51,29 +51,30 @@
               </ul>
           </div>
       </nav>
-        <div class="container">
-            <!-- Tab links -->
-            <h3>Breakage</h3>
-                <table id="tableBreak" class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>QTY.</th>
-                            <th>Product</th>
-                            <th>Breakage Type</th>
-                            <th>Date</th>
-                            <th>Broken by</th>
-                            <th>Recorded by</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbodyBreak">
+      <div class="container">
+          <!-- Tab links -->
+          <h3>Breakage</h3>
+          <table id="tableBreak" class="table table-striped">
+              <thead class="thead-dark">
+                  <tr>
+                      <th>QTY.</th>
+                      <th>Product</th>
+                      <th>Breakage Type</th>
+                      <th>Date</th>
+                      <th>Broken by</th>
+                      <th>Recorded by</th>
+                      <th>Action</th>
+                  </tr>
+              </thead>
+              <tbody id="tbodyBreak">
 
-                    </tbody>
-                </table>
-                <div class="text-right">
-                    <button class="btn btn-outline-primary" id="addBreakTrigger" data-toggle="modal" data-target="#addBreakModal" >New Breakage</button>
-                </div>
-		</div>
+              </tbody>
+          </table>
+          <div class="text-right">
+              <button class="btn btn-outline-primary" id="addBreakTrigger" data-toggle="modal" data-target="#addBreakModal" >New Breakage</button>
+          </div>
+          <div class="error"></div>
+      </div>
     <!-- Breakage Modal Here -->
     <div id="addBreakModal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

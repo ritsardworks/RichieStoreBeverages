@@ -32,8 +32,21 @@ if(isset($qw)){
     }else{
       echo 1;
     }
-  }else{
+  }else if($qw == "remove"){
+    deleteBreakage($_POST['id']);
+  }
+  else{
     echo 0;
+  }
+}
+
+function deleteBreakage($break_id){
+  include 'config.php';
+  $sql = "DELETE FROM breakage WHERE break_id = $break_id";
+  if($conn -> query($sql)){
+    echo 1;
+  }else{
+    echo "Error: " . $sql . "<br>" . $conn->error;
   }
 }
 
@@ -56,8 +69,8 @@ function getBreakage(){
   if (mysqli_num_rows($result) > 0) {
       $html = null;
       while ($row = mysqli_fetch_assoc($result)) {
-        $name1 = $row['fn1']. " ". $row['mn1']. ". ".$row['ln1'];
-        $name2 = $row['fname']. " ". $row['mname']. ". ".$row['lname'];
+        $name1 = $row['fn1']. " ". $row['mn1'][0]. ". ".$row['ln1'];
+        $name2 = $row['fname']. " ". $row['mname'][0]. ". ".$row['lname'];
         $html .= "<tr>
         <td>".$row['qty']."</td>
         <td>".$row['dscrptn']."</td>
@@ -65,7 +78,7 @@ function getBreakage(){
         <td>".$row['date']."</td>
         <td>".$name1."</td>
         <td>".$name2."</td>
-        <td></td>
+        <td><button class='btn btn-danger' value=".$row['break_id']." onclick='deleteBreakage(this)'><i class='fa fa-trash' aria-hidden='true'></i></button></td>
         </tr>";
       }
   } else {
