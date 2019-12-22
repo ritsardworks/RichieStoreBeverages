@@ -50,7 +50,7 @@ function newBreakage($prof_id, $prod_id, $qty, $type){
 
 function getBreakage(){
   include 'config.php';
-  $sql = "SELECT b.break_id b.qty, p.dscrptn, b.type, b.date, pr1.fname AS fn1, pr1.mname AS mn1, pr1.lname AS ln1, pr2.fname, pr2.mname, pr2.lname FROM breakage b LEFT JOIN Products p ON p.prod_id = b.prod_id LEFT JOIN profiles pr1 ON pr1.prof_id = b.break_by LEFT JOIN profiles pr2 ON pr2.prof_id = b.rec_by WHERE avail = 1";
+  $sql = "SELECT b.break_id, b.qty, p.dscrptn, b.type, b.date, pr1.fname AS fn1, pr1.mname AS mn1, pr1.lname AS ln1, pr2.fname, pr2.mname, pr2.lname FROM breakage b LEFT JOIN Products p ON p.prod_id = b.prod_id LEFT JOIN profiles pr1 ON pr1.prof_id = b.break_by LEFT JOIN profiles pr2 ON pr2.prof_id = b.rec_by WHERE avail = 1";
   $result = mysqli_query($conn, $sql);
   $html = 0;
   if (mysqli_num_rows($result) > 0) {
