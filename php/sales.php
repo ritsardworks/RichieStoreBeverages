@@ -67,12 +67,13 @@ function refundItem($id){
 function salesLine($o_id){
     include 'config.php';
     $sql = "SELECT * FROM sales_order_line sol LEFT JOIN sales_order so ON sol.so_id = so.so_id LEFT JOIN products p ON p.prod_id = sol.prod_id WHERE so.unq_id = '$o_id'";
+    $_id = $o_id;
     $result = mysqli_query($conn, $sql);
     if (mysqli_num_rows($result) > 0) {
         $html = "
         <div class='row'>
             <div class='col-6'>
-                <h1>Order No:<span orderid='$o_id'></span></h1>
+                <h1>Order No:<span class='text-success'>".$_id."</span></h1>
             </div>
             <div class='col-6 text-right'>
                 <button class='btn btn-secondary' onclick='printLine($o_id)'><i class='fa fa-print' aria-hidden='true'></i> Print</button>
@@ -103,7 +104,10 @@ function salesLine($o_id){
             <td>".$da."</td>
             ";
             if($row['refund'] == 0 && $row['dpst'] != "N/A"){
-                $html .= "<td><button class='btn btn-danger' value='" . $row['sol_id'] . "' onclick='refund(this)'>Refund</button></td>";
+                // $html .= "<td><button class='btn btn-danger' value='" . $row['sol_id'] . "' onclick='refund(this)'>Refund</button></td>";
+                $html .= "<td><button type='button' class='btn btn-warning' data-toggle='modal' data-target='#exampleModalCenter' value='".$row['sol_id']."+".$row['qntty']."' onclick='refundThis(this.value)'>
+                  Refund
+                </button></td>";
             }else if($row['refund'] == 1){
                 $html .= "<td><span class='text-success'>REFUNDED!</span></td>";
             }else{
@@ -153,5 +157,5 @@ function sales(){
     }else{
         echo "<tr><td colspan='7' class='text-center'>No Sales Yet!</td></tr>";
     }
-}   
+}
 ?>

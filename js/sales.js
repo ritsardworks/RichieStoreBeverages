@@ -1,5 +1,5 @@
 $('document').ready(function(){
-    
+
 });
 
 function loadSales(){
@@ -46,20 +46,33 @@ function loadSalesLine(){
     });
 }
 
-function refund(data){
-    $.ajax({
-        url: 'php/sales.php?q=refund&id='+data.value,
-        type: 'post',
-        data: {id: data.value},
-        success: function (response) {
-            if(response == 1){
-                alert('Refunded!');
-                loadSalesLine();
-            }else{
-                $('.container').html(response);
-            }
-        }
+function refundThis(data){
+  var split = data.split("+");
+  var max = split[1];
+  var id = split[0];
+  $('#id').val(id);
+  $("#refundVal").attr({
+       "max" : max,        // substitute your own
+       "min" : 0          // values (or variables) here
     });
+}
+
+function refund(data){
+  var qty = $('#refundVal').val();
+  console.log(data.value + " " + qty);
+    // $.ajax({
+    //     url: 'php/sales.php?q=refund&id='+data.value,
+    //     type: 'post',
+    //     data: {id: data.value, qty: qty},
+    //     success: function (response) {
+    //         if(response == 1){
+    //             alert('Refunded!');
+    //             loadSalesLine();
+    //         }else{
+    //             $('.container').html(response);
+    //         }
+    //     }
+    // });
 }
 
 function back(){

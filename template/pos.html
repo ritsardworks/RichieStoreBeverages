@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>POS</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style media="screen">
+
+    </style>
+    <script type="text/javascript" src="../jquery.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
+  </head>
+  <body onload="getProducts()">
+    <div class="container">
+      <div class="row">
+        <div class="col-3">
+          <h2>Ticket</h2>
+          <table class="ticketTbl">
+            <thead>
+                <tr>
+                    <th class="quantity">Qty.</th>
+                    <th class="description">Description</th>
+                    <th class="price">Due</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+        <div class="col-9 scrollable">
+          <h2>Products</h2>
+          <table class="table table-borderless">
+            <tbody id="tproducts">
+
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="depositModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="depositModalTitle">Deposit</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="">Quantity Remaining</label>
+              <span id="lblQty" class=""></span>
+              <input class="form-inline form-control form-control-lg" type="number" name="qty" id="qty" value="0">
+            </div>
+            <div class='form-group'>
+              <label for="caseDpst">Bottle Deposit</label>
+              <span class="text-danger" id="lblBtl"></span>
+              <input class="form-inline form-control form-control-lg" type="number" name="btlDpst" id="btlDpst" value="0" placeholder="Bottle Deposit">
+            </div>
+            <div class='form-group'>
+              <label for="caseDpst">Case Deposit</label>
+              <span class="text-danger" id="lblCase"></span>
+              <input class="form-inline form-control form-control-lg" type="number" name="caseDpst" id="caseDpst" value="0" placeholder="Case Deposit">
+            </div>
+            <div class='form-group'>
+              <label for="caseDpst">Shell Deposit</label>
+              <span class="text-danger" id="lblShell"></span>
+              <input class="form-inline form-control form-control-lg" type="number" name="shllDpst" id="shllDpst" value="0" placeholder="Shell Deposit">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Add to Ticket</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ?End of Modal -->
+    <script src="pos.js"></script>
+  </body>
+</html>
