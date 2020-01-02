@@ -53,26 +53,29 @@ function refundThis(data){
   $('#id').val(id);
   $("#refundVal").attr({
        "max" : max,        // substitute your own
-       "min" : 0          // values (or variables) here
+       "min" : 1          // values (or variables) here
     });
 }
 
 function refund(data){
   var qty = $('#refundVal').val();
   console.log(data.value + " " + qty);
-    // $.ajax({
-    //     url: 'php/sales.php?q=refund&id='+data.value,
-    //     type: 'post',
-    //     data: {id: data.value, qty: qty},
-    //     success: function (response) {
-    //         if(response == 1){
-    //             alert('Refunded!');
-    //             loadSalesLine();
-    //         }else{
-    //             $('.container').html(response);
-    //         }
-    //     }
-    // });
+  // $('#exampleModalCenter').modal('hide');
+    $.ajax({
+      url: 'php/sales.php?q=refund&id='+data.value,
+      type: 'post',
+      data: {id: data.value, qty: qty},
+      success: function (response) {
+        if(response == 1){
+
+            // alert('Refunded!');
+            loadSalesLine();
+        }else{
+            $('.container').html(response);
+        }
+      }
+    });
+
 }
 
 function back(){

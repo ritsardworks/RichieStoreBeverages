@@ -13,7 +13,7 @@ if($q == "getSales" && checkLog() == true){
 }else if($q == "getLine" && isset($_SESSION['o_id']) && checkLog() == true){
     salesLine($_SESSION['o_id']);
 }else if($q == "refund"){
-    refundItem($_GET['id']);
+    refundItem($_GET['id'], $_POST['qty']);
 }else{
     echo "index.html";
 }
@@ -27,36 +27,54 @@ function checkLog()
     }
 }
 
-function refundItem($id){
+function refundItem($id,$qty){
     include 'config.php';
     $get = "SELECT * FROM sales_order_line sol LEFT JOIN sales_order so ON so.so_id = sol.so_id LEFT JOIN inventory i ON i.prod_id = sol.prod_id WHERE sol_id = $id";
     $result = mysqli_query($conn, $get);
     if(mysqli_num_rows($result) == 1){
         while($row = mysqli_fetch_assoc($result)){
             $dpst = $row['ttl_dpst'] - ($row['depqty'] * $row['depprc']);
-            $upd = "UPDATE sales_order_line SET refund = 1 WHERE sol_id = $id";
-            if ($conn->query($upd) === TRUE) {
-                $updDpst = "UPDATE sales_order SET ttl_dpst = $dpst WHERE so_id = ".$row['so_id']."";
-                if ($conn->query($updDpst) === TRUE) {
-                    $updInv = "UPDATE inventory SET ";
-                    if($row['dpst'] == "Bottle"){
-                        $updInv .= "rm_btl = " . ($row['rm_btl'] - $row['depqty']);
-                    } else if ($row['dpst'] == "Case") {
-                        $updInv .= "rm_cs = " . ($row['rm_cs'] - $row['depqty']);
-                    } else if ($row['dpst'] == "Shell") {
-                        $updInv .= "rm_shll = " . ($row['rm_shll'] - $row['depqty']);
-                    }
-                    $updInv .= " WHERE inv_id = ". $row['inv_id'];
+            $rem = $row['qntty'] - $qty;
+            if($rem == 0){
+              $stat = 1;
+            }else{
+              $stat = 0;
+            }
+            $updQty = $row['qtty'] + $qty;
+            $updItems = "UPDATE inventory SET qtty = $updQty WHERE inv_id = ".$row['inv_id']."";
+            if($conn->query($updItems)){
+              $date = date("Y-m-d H:i:s");
+              $ref = "INSERT INTO refunds VALUES(null, '$date', '$qty', '$id', '".$_SESSION['u_id']."')";
+              if($conn->query($ref)){
+                $upd = "UPDATE sales_order_line SET refund = $stat, qntty = $rem WHERE sol_id = $id";
+                if ($conn->query($upd) === TRUE) {
+                    $updDpst = "UPDATE sales_order SET ttl_dpst = $dpst WHERE so_id = ".$row['so_id']."";
                     if ($conn->query($updDpst) === TRUE) {
-                        echo 1;
-                    } else {
+                        $updInv = "UPDATE inventory SET ";
+                        if($row['dpst'] == "Bottle"){
+                            $updInv .= "rm_btl = " . ($row['rm_btl'] - $row['depqty']);
+                        } else if ($row['dpst'] == "Case") {
+                            $updInv .= "rm_cs = " . ($row['rm_cs'] - $row['depqty']);
+                        } else if ($row['dpst'] == "Shell") {
+                            $updInv .= "rm_shll = " . ($row['rm_shll'] - $row['depqty']);
+                        }
+                        $updInv .= " WHERE inv_id = ". $row['inv_id'];
+                        if ($conn->query($updDpst) === TRUE) {
+                            echo 1;
+                        } else {
+                            echo "Error: " . $updDpst . "<br>" . $conn->error;
+                        }
+                    }else{
                         echo "Error: " . $updDpst . "<br>" . $conn->error;
                     }
-                }else{
-                    echo "Error: " . $updDpst . "<br>" . $conn->error;
+                } else {
+                    echo "Error: " . $upd . "<br>" . $conn->error;
                 }
-            } else {
+              }else{
                 echo "Error: " . $upd . "<br>" . $conn->error;
+              }
+            }else{
+              echo "Error: " . $upd . "<br>" . $conn->error;
             }
         }
     }else{
