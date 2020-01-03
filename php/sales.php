@@ -118,7 +118,7 @@ function salesLine($o_id){
         $html .= "</tbody></table>";
         echo $html;
     }else{
-        echo "< class='text-center'>No Items To Show!</>";
+        echo "<span class='text-center'>No Items To Show!</span>";
     }
 }
 function sales(){
