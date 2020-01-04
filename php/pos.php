@@ -62,16 +62,16 @@ function pay($data){
                     $ins = "INSERT INTO Sales_order_line VALUES(null,'" . $row['qty'] . "', '" . $row['prc'] . "', '" . $row['depType'] . "','".$id['prod_id']."', '$last_id',0, ".$row['depQty'].", '".$row['depPrice']."')";
                     if ($conn->query($ins)) {
                         $left = $id['qtty'] - $row['qty'];
-                        $upd = "UPDATE inventory SET qtty = $left, ";
+                        $upd = "UPDATE inventory SET qtty = $left ";
                         if($row['depType'] == "Bottle"){
                             $rm_btl = $id['qtty'] + $row['qty'];
-                            $upd .= "rm_btl = $rm_btl";
+                            $upd .= ",rm_btl = $rm_btl";
                         }else if($row['depType'] == "Case"){
                             $rm_cs = $id['qtty'] + $row['qty'];
-                            $upd .= "rm_cs = $rm_cs";
+                            $upd .= ",rm_cs = $rm_cs";
                         } else if ($row['depType'] == "Shell") {
                             $rm_shll = $id['qtty'] + $row['qty'];
-                            $upd .= "rm_shll = $rm_shll";
+                            $upd .= ",rm_shll = $rm_shll";
                         }
                         $upd .= " WHERE prod_id = ".$id['prod_id']."";
                         if($conn->query($upd) == TRUE){
@@ -131,7 +131,7 @@ function checkProd($prod, $qty, $type, $dq){
                 $rem = $row['qtty'];
                 echo "ERROR: Remaining Products of ". $prod . " is: ". $rem;
             }
-            
+
         }
         $html .= "</tr>";
         if($offset > 0){
@@ -140,7 +140,7 @@ function checkProd($prod, $qty, $type, $dq){
     }else{
         echo 0;
     }
-    
+
 }
 
 

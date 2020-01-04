@@ -14,8 +14,34 @@ if($q == "getSales" && checkLog() == true){
     salesLine($_SESSION['o_id']);
 }else if($q == "refund"){
     refundItem($_GET['id'], $_POST['qty']);
-}else{
+}else if($q == "getRefunds"){
+  refundsLine($_SESSION['o_id']);
+}
+else{
     echo "index.html";
+}
+
+function refundsLine($o_id){
+  include 'config.php';
+  $sql = "SELECT r.qntty, p.dscrptn, r.date, fname, mname, lname FROM refunds r LEFT JOIN sales_order_line sil ON sil.sol_id = r.sol_id LEFT JOIN inventory i ON sil.prod_id = i.prod_id LEFT JOIN products p ON p.prod_id = sil.prod_id LEFT JOIN profiles pr ON pr.prof_id = r.prof_id LEFT JOIN sales_order so ON so.so_id = sil.so_id WHERE so.unq_id = $o_id";
+  $result = mysqli_query($conn, $sql);
+  $html = "";
+  if(mysqli_num_rows($result) >= 1){
+    while($row = mysqli_fetch_assoc($result)){
+      $html .= "<tr class='text-danger'>";
+      $name = $row['fname'] . " " . $row['mname'][0].". ".$row['lname'];
+      $html .= "
+        <td>".$row['qntty']."</td>
+        <td>".$row['dscrptn']."</td>
+        <td>".$row['date']."</td>
+        <td>".$name."</td>
+      </tr>";
+
+    }
+  }else{
+    $html = "<tr><td class='text-center' colspan='4'>No Refunds to Show</td></tr>";
+  }
+  echo $html;
 }
 
 function checkLog()

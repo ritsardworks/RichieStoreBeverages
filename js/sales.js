@@ -1,6 +1,20 @@
 $('document').ready(function(){
-
+  loadRefunds();
 });
+
+function loadRefunds(){
+  $.ajax({
+      url: 'php/sales.php?q=getRefunds',
+      type: 'get',
+      success: function (response) {
+          if(response.includes('.html')){
+              window.location = (response);
+          }else{
+              $('#refunds').append(response);
+          }
+      }
+  });
+}
 
 function loadSales(){
     $.ajax({

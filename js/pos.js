@@ -1,16 +1,14 @@
 $('document').ready(function(){
     $('#btnPay').click(function (){
+      var rem =$('#change').val()
+      if(rem >= 0){
         var json = JSON.stringify(getJson());
         $.ajax({
             url:"php/pos.php?q=pay&data="+json,
             type: 'post',
             data:{data: json},
             success: function (response) {
-                // if (response == 0) {
-                //     alert('No Products in Cart. Please add one or more products to cart to procedd for payment');
-                // }else{
-                //     alert(response);
-                // }
+                console.log(response);
                 if(response == 1){
                     // alert('Success!');
                     // clear();
@@ -29,9 +27,19 @@ $('document').ready(function(){
                     $(".error").html(response);
                 }
             }
-        });
+          });
+      }else{
+        alert('Insufficient Cash Provided!');
+      }
     });
 });
+
+function cashCompute(){
+  var ttl = $('#ttlAmnt').val();
+  var cash = $('#cash').val();
+  var rem = cash - ttl;
+  $('#change').val(rem);
+}
 
 function getJson() {
     var TableData = new Array();
@@ -64,10 +72,15 @@ function setValue(data){
 function compute(){
     var ttl = 0;
     $('#listOfProducts tr').each(function (row, tr) {
-        ttl += ($(tr).find('td:eq(0) input').val() * parseInt($(tr).find('td:eq(2)').text()) 
+        ttl += ($(tr).find('td:eq(0) input').val() * parseInt($(tr).find('td:eq(2)').text())
         + (parseInt($(tr).find('td:eq(4)').text()) * parseInt($(tr).find('td:eq(5)').text())));
     });
     $('#ttlAmnt').val(ttl);
+    var change = 0;
+    var cash = $('#cash').val();
+    change = cash-ttl;
+    $('#change').val(change);
+    console.log(change);
 }
 
 function remove(o){

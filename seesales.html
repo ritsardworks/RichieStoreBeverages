@@ -61,7 +61,27 @@
                 <button class='btn btn-outline-primary' onclick='back()'><i class='fa fa-arrow-left' aria-hidden='true'> Back</i></button>
             </div>
             <br />
-            <div id="salesLine"></div>
+            <div class="row">
+              <div class="col">
+                <div id="salesLine"></div>
+              </div>
+            </div>
+            <div id="refundsLine">
+              <h3>Refunds</h3>
+              <table class="table table-striped">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>QTY.</th>
+                    <th>Item Description</th>
+                    <th>Date</th>
+                    <th>By</th>
+                  </tr>
+                </thead>
+                <tbody id="refunds">
+
+                </tbody>
+              </table>
+            </div>
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
