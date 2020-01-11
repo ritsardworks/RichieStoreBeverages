@@ -84,6 +84,7 @@ function refund(data){
 
             // alert('Refunded!');
             loadSalesLine();
+            loadRefunds();
         }else{
             $('.container').html(response);
         }

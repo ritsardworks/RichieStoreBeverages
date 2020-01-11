@@ -51,7 +51,7 @@ function pay($data){
     }
     $grndttl = $ttlAmnt + $ttlDep;
     $unq = date("Ymdhis");
-    $sql = "INSERT INTO Sales_Order VALUES (null, '" . date("Y-m-d H:i:s") . "', '$ttlAmnt', '$ttlDep', '$grndttl', '".$_SESSION["u_id"]."', '" .$unq ."')";
+    $sql = "INSERT INTO Sales_Order VALUES (null, '" . date("Y-m-d H:i:s") . "', '$ttlAmnt', '$ttlDep', '$grndttl', '".$_SESSION["u_id"]."', '" .$unq ."' ,0)";
     if($conn -> query($sql)){
         $last_id = $conn->insert_id;
         foreach ($data as $row) {

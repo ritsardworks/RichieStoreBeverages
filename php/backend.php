@@ -99,7 +99,7 @@ function getStock($id){
     $html = 0;
     $sql = "SELECT * FROM products p LEFT JOIN inventory i ON i.prod_id = p.prod_id WHERE p.prod_id = $id";
     $result = mysqli_query($conn, $sql);
-    if (mysqli_num_rows($result) > 0) { 
+    if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
             $html = "<div><h1>".$row['dscrptn']."</h1></div>
             <div><h2>Current Stock: ";
@@ -170,7 +170,7 @@ function getProduct($id){
     }else{
         echo 0;
     }
-    
+
 }
 
 function updateProduct($id){
@@ -222,7 +222,7 @@ function showProducts(){
             }
             $table .= '
             <td>
-            <button class="btn btn-warning " value='.$row["prod_id"]. ' onclick="showLogProd(this)"><i class="fa fa-eye" aria-hidden="true"></i></button> 
+            <button class="btn btn-warning " value='.$row["prod_id"]. ' onclick="showLogProd(this)"><i class="fa fa-eye" aria-hidden="true"></i></button>
             <button class="btn btn-info " value=' . $row["prod_id"] . ' onclick="updateProd(this)"><i class="fa fa-list-alt" aria-hidden="true"></i></button>
             <button class="btn btn-danger " value=' . $row["prod_id"] . ' onclick="deleteProd(this)"><i class="fa fa-trash" aria-hidden="true"></i></button>
             </td>
@@ -322,7 +322,7 @@ function addUser(){
     }else{
         echo 3;
     }
-    
+
 }
 
 function checkUser(){

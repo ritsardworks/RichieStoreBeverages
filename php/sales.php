@@ -74,7 +74,9 @@ function refundItem($id,$qty){
               if($conn->query($ref)){
                 $upd = "UPDATE sales_order_line SET refund = $stat, qntty = $rem WHERE sol_id = $id";
                 if ($conn->query($upd) === TRUE) {
-                    $updDpst = "UPDATE sales_order SET ttl_dpst = $dpst WHERE so_id = ".$row['so_id']."";
+                    $remRef = $row['refunded'] + ($row['prc'] * $qty);
+                    $remGrnd = $row['grndttl'] - $remRef;
+                    $updDpst = "UPDATE sales_order SET ttl_dpst = $dpst, refunded = $remRef, grndttl = $remGrnd WHERE so_id = ".$row['so_id']."";
                     if ($conn->query($updDpst) === TRUE) {
                         $updInv = "UPDATE inventory SET ";
                         if($row['dpst'] == "Bottle"){
@@ -173,13 +175,16 @@ function sales(){
         $html = "";
         while($row = mysqli_fetch_assoc($result)){
             $o_id = $row['unq_id'];
+            $date = date('Y/m/d', strtotime($row['date']));
+            $time = date('h:i:s A', strtotime($row['date']));
             $html .= '<tr>';
             $html .= "
             <td>".$row['unq_id']. "</td>
-            <td>" . $row['date'] . "</td>
-            <td>" . $row['ttl_amnt'] . "</td>
-            <td>" . $row['ttl_dpst'] . "</td>
-            <td>" . $row['grndttl'] . "</td>
+            <td>" . $date ."<br />".$time . "</td>
+            <td>₱ " . $row['ttl_amnt'] . "</td>
+            <td>₱ " . $row['ttl_dpst'] . "</td>
+            <td>₱ ".$row['refunded']."</td>
+            <td>₱ " . $row['grndttl'] . "</td>
             ";
             $getName = "SELECT fname, mname, lname FROM profiles WHERE prof_id = '".$row['prof_id']."'";
             $resultName = mysqli_query($conn, $getName);
