@@ -1,0 +1,5 @@
+After Finalization of this code (Nearing completion)
+Please separate Owner and Usual Employee Website
+For Example
+Owners can CRUD Profile, Stock_In, Products, Sales and Inventory
+While Employees can only Sell Products and only read Inventory
