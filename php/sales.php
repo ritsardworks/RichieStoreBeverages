@@ -1,25 +1,28 @@
 <?php
 
 session_start();
-$q = $_GET['q'];
-if($q == "getSales" && checkLog() == true){
-    sales();
-}else if($q=='setId'){
-    // salesLine($_GET['id']);
-    $_SESSION['o_id'] = $_GET['id'];
-    if(isset($_SESSION['o_id'])){
-        echo 1;
-    }else{ echo 0;}
-}else if($q == "getLine" && isset($_SESSION['o_id']) && checkLog() == true){
-    salesLine($_SESSION['o_id']);
-}else if($q == "refund"){
-    refundItem($_GET['id'], $_POST['qty']);
-}else if($q == "getRefunds"){
-  refundsLine($_SESSION['o_id']);
+if(isset($_GET['q'])){
+  $q = $_GET['q'];
+  if($q == "getSales" && checkLog() == true){
+      echo sales();
+  }else if($q=='setId'){
+      // salesLine($_GET['id']);
+      $_SESSION['o_id'] = $_GET['id'];
+      if(isset($_SESSION['o_id'])){
+          echo 1;
+      }else{ echo 0;}
+  }else if($q == "getLine" && isset($_SESSION['o_id']) && checkLog() == true){
+      salesLine($_SESSION['o_id']);
+  }else if($q == "refund"){
+      refundItem($_GET['id'], $_POST['qty']);
+  }else if($q == "getRefunds"){
+    refundsLine($_SESSION['o_id']);
+  }
+  else{
+      echo "index.html";
+  }
 }
-else{
-    echo "index.html";
-}
+
 
 function refundsLine($o_id){
   include 'config.php';
@@ -202,9 +205,9 @@ function sales(){
             </td>";
             $html .= '</tr>';
         }
-        echo $html;
+        return $html;
     }else{
-        echo "<tr><td colspan='7' class='text-center'>No Sales Yet!</td></tr>";
+        return "<tr><td colspan='7' class='text-center'>No Sales Yet!</td></tr>";
     }
 }
 ?>
