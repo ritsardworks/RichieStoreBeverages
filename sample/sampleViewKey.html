@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>View key Identifier</title>
+  </head>
+  <body>
+    <input type="text" id="text" value="" onkeyup="viewusers()">
+    <div class="main-body">
+
+    </div>
+  <script src="../jquery.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    function viewusers(){
+       var sample = $('#text').val();
+       console.log(sample);
+      $.ajax({
+        url: "php/sample.php",
+        type: "post",
+        data: {viewkey: sample},
+        success: function(response){
+          $('.main-body').html(response);
+        }
+      })
+    }
+  </script>
+  </body>
+</html>

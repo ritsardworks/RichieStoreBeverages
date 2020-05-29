@@ -1,0 +1,43 @@
+BACKEND.PHP
+login = 2736fab291f04e69b62d490c3c09361f5b82461a
+regUser = 7ffc03705564f3393e54d040cc0b57f669b9aa31
+users = 5b7dcd14a4faa2cdd54cf6eb8d4bc35da31914a1
+getUser = abbd3e69ae611fcd3b75d9580b4555478f23771a
+newProduct = 984a1a8ee528033f64f83f0c4acaccff09e5daf3
+getProducts = f1a0f7a7df994df78bf583641ceec62a24309aff
+showProduct = 270dc6e78e4889fc435019d7f04252bc0bc91a9c
+stock = ed487e1e87c675af89db011b2903f20f99b11c7d
+newStock = 9668942cde3ca06ddb2de8624060d293d7961949
+updProd = 308aa29eac27f938f4d65ed48ce27eaf530e027e
+deleteProd = 7290cf6479f96c0cfa746ce1a4b8fb6a9ebb03a0
+userDetails = f9647578680002ad16a40995193036847a5fcf63
+updateUser = 6d74493f90920b64b99da7784bfccec66f3bbe06
+employeeStop = 36273032c690ab34dd46632b2f967ebfaabfa271
+loggingOut = 7265e11f5e565cfe985dcbd9a2712517d7a7cab5
+deleteUser = 38e8e88f6238f83ed3db9d83dd8cd8572880e652
+___________________________________________________________________
+POS.php
+loadProducts = 6862727f7dd613ba852613f1368d0f57491640a7
+addProduct = ac343fc0274fb4ba6511c3d6768c3cea12139dfa
+pay = bfc95e50f828f0aecd632c939fd45c1bf5272127
+orderNo = b68fac798f0b8ac099bde3484b41a0888c0576d5
+___________________________________________________________________
+SALES.PHP
+getSales = d30be8f4c57c2127e49c5724b36d4a596e1f584d
+setId = 11890789305b682c11e69e393a8ade8bc6c4595b
+getLine = 98f9e18f1957b7ce18a9c7470ca8de5f41188efe
+refund = b51118f58785274e117efe1bf99d4d50ccb96949
+getRefunds = 2f5eac9bda8eec5cd54257bcf62a469e9c4543f3
+
+divide Backend.php to different files
+login.php contains login  and checkUser.php
+profile.php contains regUser, users, getUser
+product.php contains newProduct, showProduct, updProd, deleteProd
+inventory.php contains stock, newStock
+
+
+
+
+
+start = 2b020927d3c6eb407223a1baa3d6ce3597a3f88d
+login = 2736fab291f04e69b62d490c3c09361f5b82461a

@@ -94,7 +94,7 @@ $(document).ready(function (){
         }
     });
     $('#newProd').click(function(){
-        if ($('#newProd').val() > 0){
+        if ($('#newProd').val() == 1){
             console.log($('#newProd').val());
             var desc = $('#dscrptn').val().replace(/'/g, '').replace(/"/g, '');;
             var rtl = $('#rtl_prc').val().replace(/'/g, '').replace(/"/g, '');;
